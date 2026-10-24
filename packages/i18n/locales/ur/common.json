@@ -176,7 +176,47 @@
     "chartMilkTitle": "نشست کے لحاظ سے دودھ",
     "sessionMorning": "صبح",
     "sessionNoon": "دوپہر",
-    "sessionEvening": "شام"
+    "sessionEvening": "شام",
+    "sectionPickers": "منتخب کرنے والے اور اپ لوڈ",
+    "dateLabel": "آخری بچہ دینے کی تاریخ",
+    "datePlaceholder": "تاریخ منتخب کریں",
+    "timeLabel": "دودھ دوہنے کا وقت",
+    "phoneLabel": "موبائل نمبر",
+    "comboLabel": "جانور",
+    "comboPlaceholder": "جانور منتخب کریں",
+    "comboSearch": "ٹیگ یا نام سے تلاش کریں",
+    "multiLabel": "گروپ",
+    "multiPlaceholder": "گروپ منتخب کریں",
+    "uploadLabel": "جانور کی تصاویر",
+    "sectionNavigation": "مراحل، حصے اور تہہ ہونے والا مواد",
+    "stepBasics": "بنیادی",
+    "stepStatus": "حالت",
+    "stepParents": "والدین",
+    "sectionBasic": "بنیادی معلومات",
+    "sectionParentage": "نسب",
+    "faqOne": "دوا کی پابندی کے دوران دودھ کا کیا ہوتا ہے؟",
+    "faqOneBody": "یہ درج ہوتا ہے اور الگ رکھا جاتا ہے، اور پابندی ختم ہونے تک فروخت میں شامل نہیں ہو سکتا۔",
+    "faqTwo": "کیا میں محفوظ شدہ دودھ کا اندراج بدل سکتا ہوں؟",
+    "faqTwoBody": "جی ہاں، مہینہ بند ہونے تک۔ تبدیلیاں آڈٹ لاگ میں محفوظ رہتی ہیں۔",
+    "openPopover": "پاپ اوور کھولیں",
+    "popoverBody": "چھوٹی تفصیل جس کے لیے پورا ڈائیلاگ ضروری نہیں۔",
+    "summaryOne": "ٹیگ نمبر",
+    "summaryOneMsg": "صرف حروف، اعداد اور ہائفن استعمال کریں۔",
+    "summaryTwo": "دودھ کی مقدار",
+    "summaryTwoMsg": "ایک دوہنے کے لیے یہ بہت زیادہ لگتا ہے (زیادہ سے زیادہ 80 لیٹر)۔",
+    "sectionInsights": "اسکور، بہترین فہرست اور ٹائم لائن",
+    "healthTitle": "فارم کی صحت کا اسکور",
+    "topTitle": "بہترین کارکردگی والے جانور",
+    "timelineTitle": "جانور کی ٹائم لائن",
+    "colAnimal": "جانور",
+    "colAverage": "اوسط لیٹر",
+    "timelineCalving": "بچھیا کو جنم دیا",
+    "timelineVaccine": "ٹیکہ لگایا (منہ کھر)",
+    "timelineHeat": "گرمی دیکھی گئی",
+    "sectionSync": "ہم آہنگی اور آف لائن",
+    "openPalette": "تلاش کھولیں (Ctrl K)",
+    "paletteGoDesign": "ڈیزائن سسٹم",
+    "paletteAnimal": "PK-1042 رانی"
   },
   "roles": {
     "manager": "منیجر"
@@ -202,5 +242,61 @@
     "hideTable": "جدول چھپائیں",
     "total": "کل",
     "empty": "اس مدت کے لیے کوئی ڈیٹا نہیں"
+  },
+  "picker": {
+    "nextMonth": "اگلا مہینہ",
+    "previousMonth": "پچھلا مہینہ",
+    "clear": "تاریخ ہٹائیں",
+    "country": "ملک",
+    "loadFailed": "فہرست لوڈ نہیں ہو سکی۔ انٹرنیٹ دیکھیں اور دوبارہ کوشش کریں۔",
+    "noMatches": "کوئی نتیجہ نہیں ملا",
+    "remove": "{name} ہٹائیں"
+  },
+  "upload": {
+    "remove": "{name} ہٹائیں",
+    "prompt": "تصاویر منتخب کریں یا یہاں چھوڑ دیں",
+    "limits": "زیادہ سے زیادہ {count} فائلیں، ہر ایک {size} ایم بی تک",
+    "selected": "منتخب فائلیں",
+    "problemType": "{name} کی فائل کی قسم قبول نہیں۔",
+    "problemSize": "{name} بہت بڑی ہے۔",
+    "problemCount": "{name} شامل نہیں ہوئی: فائلیں بہت زیادہ ہیں۔"
+  },
+  "form": {
+    "stepDone": "مکمل",
+    "summaryTitle": "{count, plural, one {محفوظ کرنے سے پہلے # مسئلہ ٹھیک کریں} other {محفوظ کرنے سے پہلے # مسائل ٹھیک کریں}}"
+  },
+  "healthScore": {
+    "good": "اچھا",
+    "fair": "درمیانہ",
+    "poor": "توجہ درکار"
+  },
+  "palette": {
+    "title": "تلاش اور کمانڈز",
+    "noResults": "کوئی نتیجہ نہیں۔ ٹیگ نمبر، نام یا صفحہ آزمائیں۔",
+    "pages": "یہاں جائیں",
+    "animals": "جانور",
+    "goToDashboard": "ڈیش بورڈ کھولیں"
+  },
+  "notifications": {
+    "markAllRead": "سب کو پڑھا ہوا نشان زد کریں",
+    "empty": "سب کچھ دیکھ لیا گیا ہے۔",
+    "unread": "نہ پڑھا ہوا"
+  },
+  "sync": {
+    "synced": "سب محفوظ",
+    "syncing": "ہم آہنگ ہو رہا ہے",
+    "pending": "{count, plural, one {# اندراج بھیجنے کا منتظر} other {# اندراجات بھیجنے کے منتظر}}",
+    "offline": "آف لائن",
+    "error": "ہم آہنگی میں مسئلہ"
+  },
+  "sample": {
+    "notifVaccine": "3 جانوروں کا ٹیکہ واجب ہے",
+    "notifVaccineBody": "دودھ دینے والا ریوڑ، اس ہفتے",
+    "notifHold": "دودھ کی پابندی کل ختم ہو رہی ہے",
+    "notifHoldBody": "PK-1042 رانی، دوا کے بعد کی پابندی",
+    "notifStock": "بنولہ کھل کم ہو رہی ہے",
+    "notifStockBody": "تقریباً 2 دن کا چارہ باقی ہے",
+    "minutesAgo": "{count, plural, one {# منٹ پہلے} other {# منٹ پہلے}}",
+    "hoursAgo": "{count, plural, one {# گھنٹہ پہلے} other {# گھنٹے پہلے}}"
   }
 }

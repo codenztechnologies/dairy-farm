@@ -176,7 +176,47 @@
     "chartMilkTitle": "Milk by session",
     "sessionMorning": "Morning",
     "sessionNoon": "Noon",
-    "sessionEvening": "Evening"
+    "sessionEvening": "Evening",
+    "sectionPickers": "Pickers and uploads",
+    "dateLabel": "Last calving date",
+    "datePlaceholder": "Choose a date",
+    "timeLabel": "Milking time",
+    "phoneLabel": "Mobile number",
+    "comboLabel": "Animal",
+    "comboPlaceholder": "Choose an animal",
+    "comboSearch": "Search by tag or name",
+    "multiLabel": "Groups",
+    "multiPlaceholder": "Choose groups",
+    "uploadLabel": "Animal photos",
+    "sectionNavigation": "Steps, sections and disclosure",
+    "stepBasics": "Basics",
+    "stepStatus": "Status",
+    "stepParents": "Parents",
+    "sectionBasic": "Basic information",
+    "sectionParentage": "Parentage",
+    "faqOne": "What happens to milk during a medicine hold?",
+    "faqOneBody": "It is recorded and kept separate, and it cannot be added to a sale until the hold ends.",
+    "faqTwo": "Can I edit a saved milking?",
+    "faqTwoBody": "Yes, until the month is closed. Changes are kept in the audit log.",
+    "openPopover": "Open popover",
+    "popoverBody": "Small detail that does not need a full dialog.",
+    "summaryOne": "Tag number",
+    "summaryOneMsg": "Use letters, numbers and hyphens only.",
+    "summaryTwo": "Milk yield",
+    "summaryTwoMsg": "That looks too high for one milking (max 80 L).",
+    "sectionInsights": "Score, top list and timeline",
+    "healthTitle": "Farm health score",
+    "topTitle": "Top performing animals",
+    "timelineTitle": "Animal timeline",
+    "colAnimal": "Animal",
+    "colAverage": "Avg. litres",
+    "timelineCalving": "Calved a heifer calf",
+    "timelineVaccine": "Vaccinated (FMD)",
+    "timelineHeat": "Heat observed",
+    "sectionSync": "Sync and offline",
+    "openPalette": "Open search (Ctrl K)",
+    "paletteGoDesign": "Design system",
+    "paletteAnimal": "PK-1042 Rani"
   },
   "roles": {
     "manager": "Manager"
@@ -202,5 +242,61 @@
     "hideTable": "Hide table",
     "total": "Total",
     "empty": "No data for this period"
+  },
+  "picker": {
+    "nextMonth": "Next month",
+    "previousMonth": "Previous month",
+    "clear": "Clear date",
+    "country": "Country",
+    "loadFailed": "Could not load the list. Check your connection and try again.",
+    "noMatches": "No matches",
+    "remove": "Remove {name}"
+  },
+  "upload": {
+    "remove": "Remove {name}",
+    "prompt": "Choose photos or drop them here",
+    "limits": "Up to {count} files, {size} MB each",
+    "selected": "Selected files",
+    "problemType": "{name} is not an allowed file type.",
+    "problemSize": "{name} is too large.",
+    "problemCount": "{name} was not added: too many files."
+  },
+  "form": {
+    "stepDone": "completed",
+    "summaryTitle": "{count, plural, one {Fix # problem before saving} other {Fix # problems before saving}}"
+  },
+  "healthScore": {
+    "good": "Good",
+    "fair": "Fair",
+    "poor": "Needs attention"
+  },
+  "palette": {
+    "title": "Search and commands",
+    "noResults": "No results. Try a tag number, name or page.",
+    "pages": "Go to",
+    "animals": "Animals",
+    "goToDashboard": "Open dashboard"
+  },
+  "notifications": {
+    "markAllRead": "Mark all as read",
+    "empty": "You are all caught up.",
+    "unread": "Unread"
+  },
+  "sync": {
+    "synced": "All saved",
+    "syncing": "Syncing",
+    "pending": "{count, plural, one {# entry waiting to sync} other {# entries waiting to sync}}",
+    "offline": "Offline",
+    "error": "Sync problem"
+  },
+  "sample": {
+    "notifVaccine": "3 animals are due for vaccination",
+    "notifVaccineBody": "Lactating herd, this week",
+    "notifHold": "Milk hold ends tomorrow",
+    "notifHoldBody": "PK-1042 Rani, medicine withdrawal",
+    "notifStock": "Cotton seed cake is running low",
+    "notifStockBody": "About 2 days of feed left",
+    "minutesAgo": "{count, plural, one {# minute ago} other {# minutes ago}}",
+    "hoursAgo": "{count, plural, one {# hour ago} other {# hours ago}}"
   }
 }
