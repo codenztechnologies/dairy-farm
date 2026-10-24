@@ -1,0 +1,32 @@
+{
+  "name": "@dairy/theme",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Design tokens (single source of truth), Tailwind v4 mapping and self-hosted fonts",
+  "exports": {
+    "./tokens.css": "./tokens.css",
+    "./tailwind.css": "./tailwind.css",
+    "./fonts.css": "./fonts.css",
+    "./brand": "./brand.ts"
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "test": "node --test \"scripts/*.test.mjs\"",
+    "check:contrast": "node scripts/check-contrast.mjs",
+    "gen:tokens": "node scripts/gen-native-tokens.mjs",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@fontsource-variable/inter": "5.3.0",
+    "@fontsource-variable/jetbrains-mono": "5.3.0",
+    "@fontsource-variable/noto-naskh-arabic": "5.3.0",
+    "tailwindcss": "4.3.3"
+  },
+  "devDependencies": {
+    "eslint": "10.13.0",
+    "@dairy/config": "workspace:*",
+    "typescript": "6.0.3",
+    "@types/node": "26.6.5"
+  }
+}

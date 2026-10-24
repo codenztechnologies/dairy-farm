@@ -1,0 +1,4 @@
+{
+  "extends": "@dairy/config/tsconfig/node.json",
+  "include": ["*.ts", "eslint.config.js"]
+}

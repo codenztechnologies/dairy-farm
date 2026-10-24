@@ -1,0 +1,44 @@
+/* Entry point for apps: tokens + Tailwind v4 + base styles. Import once in the app's global CSS.
+   Order matters: tokens.css stays unlayered so it wins over the theme keys generated from it. */
+@import 'tailwindcss';
+@import './tokens.css';
+@import './theme.generated.css';
+
+@layer base {
+  html {
+    font-family: var(--font-body);
+    line-height: var(--leading-normal);
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    font-size: var(--text-md);
+    font-variant-numeric: tabular-nums;
+    min-block-size: 100dvh;
+  }
+
+  :focus-visible {
+    outline: var(--focus-ring-width) solid var(--color-focus-ring);
+    outline-offset: var(--focus-ring-offset);
+  }
+
+  ::selection {
+    background-color: var(--color-selection);
+  }
+
+  button,
+  [role='button'],
+  a,
+  summary,
+  select {
+    touch-action: manipulation;
+  }
+
+  button:not(:disabled),
+  [role='button'] {
+    cursor: pointer;
+  }
+}

@@ -79,11 +79,19 @@
   --p-night-400: #64778f;
 
   /* ---------- Typography ---------- */
-  --font-display: 'Inter', 'Noto Naskh Arabic', system-ui, -apple-system, 'Segoe UI', sans-serif;
-  --font-body: 'Inter', 'Noto Naskh Arabic', system-ui, -apple-system, 'Segoe UI', sans-serif;
-  --font-mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
-  --font-urdu-display: 'Noto Naskh Arabic', 'Noto Sans Arabic', system-ui, sans-serif;
-  --font-urdu-body: 'Noto Naskh Arabic', 'Noto Sans Arabic', system-ui, sans-serif;
+  --font-display:
+    'Inter Variable', 'Inter', 'Noto Naskh Arabic Variable', 'Noto Naskh Arabic', system-ui,
+    -apple-system, 'Segoe UI', sans-serif;
+  --font-body:
+    'Inter Variable', 'Inter', 'Noto Naskh Arabic Variable', 'Noto Naskh Arabic', system-ui,
+    -apple-system, 'Segoe UI', sans-serif;
+  --font-mono:
+    'JetBrains Mono Variable', 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Menlo, Consolas,
+    monospace;
+  --font-urdu-display:
+    'Noto Naskh Arabic Variable', 'Noto Naskh Arabic', 'Noto Sans Arabic', system-ui, sans-serif;
+  --font-urdu-body:
+    'Noto Naskh Arabic Variable', 'Noto Naskh Arabic', 'Noto Sans Arabic', system-ui, sans-serif;
 
   --text-xs: 0.75rem;
   --text-sm: 0.875rem;
