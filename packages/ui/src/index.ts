@@ -102,3 +102,40 @@ export {
   TooltipProvider,
 } from './components/overlays';
 export { Toaster, toast, type ToastInput } from './components/toast';
+
+export {
+  Accordion,
+  FormSummary,
+  Popover,
+  SectionHeader,
+  Stepper,
+  type FormIssue,
+} from './components/disclosure';
+export {
+  HealthScoreRing,
+  MiniTable,
+  Timeline,
+  type TimelineEvent,
+} from './components/data-display';
+export { FileUpload, type FileProblem } from './components/file-upload';
+export {
+  Combobox,
+  DatePicker,
+  MultiSelect,
+  PhoneInput,
+  TimePicker,
+  type ComboOption,
+} from './components/pickers';
+export {
+  CommandPalette,
+  useCommandShortcut,
+  type PaletteGroup,
+  type PaletteItem,
+} from './shell/palette';
+export {
+  NotificationCenter,
+  OfflineBanner,
+  SyncPill,
+  type NotificationItem,
+  type SyncStatus,
+} from './shell/status';
