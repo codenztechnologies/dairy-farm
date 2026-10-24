@@ -1,0 +1,32 @@
+{
+  "name": "@dairy/i18n",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Locale catalogs (en, ur), typed keys and i18next setup. Formatters arrive in E0.7.",
+  "exports": {
+    ".": "./src/index.ts",
+    "./locales/*": "./locales/*"
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "test": "node --test \"scripts/*.test.mjs\""
+  },
+  "dependencies": {
+    "i18next": "26.5.10",
+    "i18next-icu": "2.6.1",
+    "react-i18next": "17.1.8"
+  },
+  "peerDependencies": {
+    "react": "^19.0.0"
+  },
+  "devDependencies": {
+    "@dairy/config": "workspace:*",
+    "@types/node": "26.6.5",
+    "@types/react": "19.3.0",
+    "eslint": "10.13.0",
+    "react": "19.3.1",
+    "typescript": "6.0.3"
+  }
+}
