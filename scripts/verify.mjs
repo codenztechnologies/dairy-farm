@@ -14,8 +14,12 @@ const STEPS = [
 ];
 
 // Slower gates, run with `pnpm verify:full` and in CI (added as they come into existence):
-// integration + RLS leak suite, build, e2e.
-const FULL_STEPS = [];
+// still to come: integration + RLS leak suite.
+const FULL_STEPS = [
+  { name: 'storybook', cmd: 'pnpm', args: ['build:storybook'] },
+  // Production build of the web app + Playwright: axe on every page, theme and language, layout and flows.
+  { name: 'e2e', cmd: 'pnpm', args: ['--filter', '@dairy/web', 'test:e2e'] },
+];
 
 const full = process.argv.includes('--full');
 const steps = full ? [...STEPS, ...FULL_STEPS] : STEPS;

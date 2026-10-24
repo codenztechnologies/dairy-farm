@@ -1,0 +1,31 @@
+name: Update visual baselines
+
+# Run by hand (Actions tab > Update visual baselines) after an intentional visual change.
+# Screenshots are rendered on Linux, the same as CI, so they match exactly. The job uploads them as
+# an artifact; download, review the images, and commit them under apps/web/e2e/__screenshots__.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  baselines:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v7
+      - uses: pnpm/action-setup@v6
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: package.json
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm --filter @dairy/web exec playwright install --with-deps chromium
+      - name: Render screenshots
+        run: pnpm --filter @dairy/web exec cross-env VISUAL=1 playwright test e2e/visual.spec.ts --update-snapshots
+      - uses: actions/upload-artifact@v4
+        with:
+          name: visual-baselines
+          path: apps/web/e2e/__screenshots__/
+          retention-days: 14

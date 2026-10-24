@@ -80,9 +80,11 @@ pnpm db:migrate           # apply migrations
 pnpm db:seed              # demo farm; use --large for 100 farms x 500 animals perf dataset
 pnpm gen:api-client       # regenerate typed client from OpenAPI
 pnpm gen:tokens           # regenerate theme.generated.css (Tailwind) and tokens.native.ts from tokens.css
-pnpm storybook
+pnpm storybook            # component workshop with theme and language toolbar (port 6006)
+pnpm --filter @dairy/web test:e2e   # Playwright: axe on every page/theme/language, layout, login flows
+pnpm --filter @dairy/web test:visual  # screenshot comparison (needs committed baselines, VISUAL=1)
 ```
 
 ## Current status
 
-Planning complete (docs 00-16, tokens). Phase 0 in progress. E0.1 done (Docker services verified; CI green on GitHub). E0.2 slice 1 done: theme to Tailwind mapping, base UI kit, app shell, web app with sample dashboard and `/design-system`, Urdu/RTL and dark mode reviewed in the browser. E0.2 slice 2 done (select/checkbox/switch/number/money inputs, dialogs, sheet, toast, tabs, data table on TanStack v9, ECharts wrapper, donut and list cards). E0.2 slice 3 done (date/time/phone/combobox/multiselect/upload, command palette, notification centre, sync pill, axe tests). Next: E0.2 slice 4 (form kit with the login form, table extras, Storybook, Playwright visual regression); see [docs/briefs/E0.2-theme-and-ui-kit.md](docs/briefs/E0.2-theme-and-ui-kit.md). Update this section as epics and phases complete.
+Planning complete (docs 00-16, tokens). Phase 0 in progress. E0.1 done (Docker services verified; CI green on GitHub). E0.2 slice 1 done: theme to Tailwind mapping, base UI kit, app shell, web app with sample dashboard and `/design-system`, Urdu/RTL and dark mode reviewed in the browser. E0.2 slice 2 done (select/checkbox/switch/number/money inputs, dialogs, sheet, toast, tabs, data table on TanStack v9, ECharts wrapper, donut and list cards). E0.2 done: theme to Tailwind, UI kit with all states, contracts package, form kit and login preview screen, data table with server mode and safe CSV export, Storybook, Playwright with axe on every page/theme/language. Next: E0.3 (database package, RLS harness, seed generator); see [docs/briefs/E0.2-theme-and-ui-kit.md](docs/briefs/E0.2-theme-and-ui-kit.md). Update this section as epics and phases complete.

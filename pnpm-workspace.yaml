@@ -4,4 +4,5 @@ packages:
 
 # Dependency install scripts are denied unless listed here with a reason.
 allowBuilds:
+  esbuild: false # platform binary ships as an optional package; the install script only re-verifies it
   unrs-resolver: false # prebuilt binaries ship as optional packages; no install script needed

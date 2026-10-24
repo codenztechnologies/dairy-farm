@@ -74,3 +74,12 @@ Goal: catch defects before users do, and make regressions impossible to merge. C
 - All E2E and reconciliation tests green on staging with the production build.
 - Manual exploratory pass per phase using a written charter (new farm, 10-minute tasks per role).
 - Pilot farms: weekly bug triage; GA only after 4 consecutive weeks with no data-integrity defects.
+
+## Browser, accessibility and visual tests (apps/web)
+
+- `pnpm --filter @dairy/web test:e2e` builds the web app (production mode) and runs Playwright on desktop and phone viewports.
+- **Accessibility:** axe with WCAG 2.2 AA and best-practice rules on every page, in light and dark, English and Urdu, plus open overlays (palette, notifications, dialogs, form errors). Zero violations is the bar; real colour contrast is checked here because jsdom has no layout.
+- **Layout:** no sideways scroll, correct `lang` and `dir`, no console errors or failed requests, tap-target size on phones.
+- **Flows:** login states, keyboard-only sign-in, command palette, language switch.
+- **Visual regression:** `pnpm --filter @dairy/web test:visual` (needs `VISUAL=1`). Baselines are created by the "Update visual baselines" GitHub workflow on Linux, reviewed as images, and committed under `apps/web/e2e/__screenshots__`. Once they exist CI compares against them. Never accept a changed screenshot without looking at it.
+- Component tests (Vitest, jsdom) also run axe on dialogs, forms and pickers; Storybook (`pnpm storybook`) shows every component in light/dark and English/Urdu with its own a11y panel.

@@ -20,7 +20,9 @@
     "services:up": "docker compose up -d --wait",
     "services:down": "docker compose down",
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "storybook": "pnpm --filter @dairy/ui storybook",
+    "build:storybook": "pnpm --filter @dairy/ui build-storybook"
   },
   "devDependencies": {
     "@commitlint/cli": "21.2.4",

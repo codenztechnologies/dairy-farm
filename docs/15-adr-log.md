@@ -103,6 +103,13 @@ Format: ID, decision, context, alternatives, consequences. New decisions get the
 - **Decision:** `pnpm gen:tokens` generates `theme.generated.css` (a `@theme inline` block with identical names) and `tokens.native.ts`. `pnpm verify` fails if they are stale. `--color-*: initial` removes Tailwind's default palette so raw colours cannot be used.
 - **Consequences:** Re-theming is one file. tokens.css must remain unlayered so its values win over the same-named theme declarations. Generated files are never edited by hand.
 
+## ADR-021 Form and test choices made in E0.2
+- **Validation timing:** blur and submit validators, plus a field listener that re-checks a field while it shows an error. Errors render only after the field has been reached. TanStack Form's dynamic revalidation mode was rejected: it left stale blur errors that blocked submitting with Enter.
+- **CSV export:** text cells starting with `=`, `+`, `-`, `@`, tab or carriage return get a leading apostrophe (formula injection); real numbers are untouched; UTF-8 byte-order mark so Excel reads Urdu.
+- **Browser tests run against a production build**, not the dev server (no dev overlay, tests what ships). Preview-only routes are included only when `NEXT_PUBLIC_PREVIEW_ROUTES=1`.
+- **Visual baselines come from CI (Linux)**, never from developer machines, because fonts render differently per OS.
+- **Accessible names must contain visible text** (WCAG 2.5.3): icon-and-text buttons name themselves "visible text, purpose"; avatars use generated content for initials.
+
 ## ADR-016 Hosting: containers on VPS/cloud with managed data services
 - **Decision:** Docker, managed Postgres/Redis/S3, Cloudflare; Kubernetes deferred.
 - **Consequences:** Low cost and operational simplicity; clear scaling path in docs/13.

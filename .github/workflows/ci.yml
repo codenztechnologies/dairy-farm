@@ -27,17 +27,25 @@ jobs:
           node-version-file: package.json
           cache: pnpm
       - run: pnpm install --frozen-lockfile
+      - name: Install the browser used by the end-to-end tests
+        run: pnpm --filter @dairy/web exec playwright install --with-deps chromium
       - name: Commit messages follow Conventional Commits
         if: github.event_name == 'pull_request'
         run: pnpm exec commitlint --from "${{ github.event.pull_request.base.sha }}" --to "${{ github.event.pull_request.head.sha }}"
       - name: Run all gates (same as local `pnpm verify:full`)
         run: pnpm verify:full
-      - name: Upload gate logs on failure
+      - name: Visual regression (only once baselines are committed)
+        if: hashFiles('apps/web/e2e/__screenshots__/**') != ''
+        run: pnpm --filter @dairy/web test:visual
+      - name: Upload gate logs and reports on failure
         if: failure()
         uses: actions/upload-artifact@v4
         with:
           name: verify-logs
-          path: .verify-logs/
+          path: |
+            .verify-logs/
+            apps/web/playwright-report/
+            apps/web/test-results/
           retention-days: 7
 
   security:
