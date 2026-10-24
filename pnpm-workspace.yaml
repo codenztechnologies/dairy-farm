@@ -1,0 +1,7 @@
+packages:
+  - 'apps/*'
+  - 'packages/*'
+
+# Dependency install scripts are denied unless listed here with a reason.
+allowBuilds:
+  unrs-resolver: false # prebuilt binaries ship as optional packages; no install script needed
