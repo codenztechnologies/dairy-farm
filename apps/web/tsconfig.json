@@ -1,0 +1,9 @@
+{
+  "extends": "@dairy/config/tsconfig/next.json",
+  "compilerOptions": {
+    "types": ["node"],
+    "paths": { "@/*": ["./src/*"] }
+  },
+  "include": ["next-env.d.ts", "src", ".next/types/**/*.ts", "*.ts", "*.mjs", "eslint.config.js"],
+  "exclude": ["node_modules"]
+}

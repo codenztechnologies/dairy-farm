@@ -1,0 +1,193 @@
+'use client';
+
+import { LOCALES, type Locale } from '@dairy/i18n';
+import { brand } from '@dairy/theme/brand';
+import {
+  AppShell,
+  FarmSwitcher,
+  LanguageSwitcher,
+  MenuItem,
+  MenuLabel,
+  NotificationBell,
+  SearchTrigger,
+  Sidebar,
+  ThemeToggle,
+  UserMenu,
+  type NavItem,
+} from '@dairy/ui';
+import {
+  BarChart3,
+  Beef,
+  Boxes,
+  Droplets,
+  HeartPulse,
+  HelpCircle,
+  LayoutDashboard,
+  Palette,
+  Settings,
+  Stethoscope,
+  Users,
+  Wallet,
+  Wheat,
+} from 'lucide-react';
+import Link from 'next/link';
+import { usePathname, useRouter } from 'next/navigation';
+import { useState, useSyncExternalStore, type ReactNode } from 'react';
+import { useTranslation } from 'react-i18next';
+import {
+  LOCALE_COOKIE,
+  THEME_COOKIE,
+  writePreferenceCookie,
+  type ThemeName,
+} from '@/lib/preferences';
+
+function subscribeSystemTheme(onChange: () => void): () => void {
+  const query = window.matchMedia('(prefers-color-scheme: dark)');
+  query.addEventListener('change', onChange);
+  return () => {
+    query.removeEventListener('change', onChange);
+  };
+}
+
+function getSystemDark(): boolean {
+  return window.matchMedia('(prefers-color-scheme: dark)').matches;
+}
+
+const SHOW_DESIGN_SYSTEM = process.env.NODE_ENV !== 'production';
+
+function Brand({ collapsed }: { collapsed: boolean }) {
+  return (
+    <span className="flex items-center gap-2 text-lg font-bold text-text">
+      <span
+        aria-hidden
+        className="grid size-9 shrink-0 place-items-center rounded-md bg-primary text-on-primary"
+      >
+        <Droplets className="size-5" />
+      </span>
+      <span className={collapsed ? 'sr-only' : undefined}>{brand.shortName}</span>
+    </span>
+  );
+}
+
+export function AppFrame({
+  locale,
+  initialTheme,
+  children,
+}: {
+  locale: Locale;
+  initialTheme: ThemeName | undefined;
+  children: ReactNode;
+}) {
+  const { t } = useTranslation();
+  const pathname = usePathname();
+  const router = useRouter();
+  const [collapsed, setCollapsed] = useState(false);
+  const systemDark = useSyncExternalStore(subscribeSystemTheme, getSystemDark, () => false);
+  const [choice, setChoice] = useState<ThemeName | undefined>(initialTheme);
+  // Without a saved choice the CSS follows the OS setting; mirror it for the toggle icon.
+  const theme: ThemeName = choice ?? (systemDark ? 'dark' : 'light');
+
+  const item = (id: string, icon: NavItem['icon'], href: string): NavItem => ({
+    id,
+    icon,
+    href,
+    label: t(`nav.${id}` as 'nav.dashboard'),
+    active: href === '/' ? pathname === '/' : pathname.startsWith(href),
+  });
+
+  const items = [
+    item('dashboard', LayoutDashboard, '/'),
+    item('animals', Beef, '/animals'),
+    item('milk', Droplets, '/milk'),
+    item('breeding', HeartPulse, '/breeding'),
+    item('health', Stethoscope, '/health'),
+    item('feed', Wheat, '/feed'),
+    item('money', Wallet, '/money'),
+    item('people', Users, '/people'),
+    item('stock', Boxes, '/stock'),
+    item('reports', BarChart3, '/reports'),
+  ];
+  const footerItems = [
+    ...(SHOW_DESIGN_SYSTEM ? [item('designSystem', Palette, '/design-system')] : []),
+    item('settings', Settings, '/settings'),
+    item('help', HelpCircle, '/help'),
+  ];
+
+  function changeLocale(next: Locale) {
+    writePreferenceCookie(LOCALE_COOKIE, next);
+    router.refresh();
+  }
+
+  function toggleTheme() {
+    const next: ThemeName = theme === 'dark' ? 'light' : 'dark';
+    setChoice(next);
+    document.documentElement.dataset.theme = next;
+    writePreferenceCookie(THEME_COOKIE, next);
+  }
+
+  return (
+    <AppShell
+      sidebar={({ mobile }) => (
+        <Sidebar
+          brand={<Brand collapsed={!mobile && collapsed} />}
+          items={items}
+          footerItems={footerItems}
+          collapsed={!mobile && collapsed}
+          {...(mobile
+            ? {}
+            : {
+                onToggleCollapsed: () => {
+                  setCollapsed((c) => !c);
+                },
+              })}
+          linkComponent={Link}
+        />
+      )}
+      topBar={
+        <>
+          <FarmSwitcher name="Green Valley Dairy" />
+          <div className="hidden min-w-0 flex-1 md:flex">
+            <SearchTrigger
+              placeholder={t('topbar.searchPlaceholder')}
+              hint={t('topbar.searchHint')}
+            />
+          </div>
+          <div className="ms-auto flex items-center gap-1 sm:gap-2">
+            <NotificationBell count={3} />
+            <div className="hidden items-center gap-2 sm:flex">
+              <LanguageSwitcher
+                value={locale}
+                options={LOCALES.map((value) => ({ value, label: t(`locale.${value}`) }))}
+                onChange={changeLocale}
+              />
+              <ThemeToggle theme={theme} onToggle={toggleTheme} />
+            </div>
+            <UserMenu name="Ali Raza" role={t('roles.manager')}>
+              {/* Phones: language and theme live here instead of crowding the top bar. */}
+              <div className="sm:hidden">
+                <MenuLabel>{t('topbar.language')}</MenuLabel>
+                {LOCALES.map((value) => (
+                  <MenuItem
+                    key={value}
+                    checked={value === locale}
+                    onSelect={() => {
+                      changeLocale(value);
+                    }}
+                  >
+                    {t(`locale.${value}`)}
+                  </MenuItem>
+                ))}
+                <MenuLabel>{t('topbar.theme')}</MenuLabel>
+                <MenuItem onSelect={toggleTheme}>
+                  {theme === 'dark' ? t('topbar.themeLight') : t('topbar.themeDark')}
+                </MenuItem>
+              </div>
+            </UserMenu>
+          </div>
+        </>
+      }
+    >
+      {children}
+    </AppShell>
+  );
+}

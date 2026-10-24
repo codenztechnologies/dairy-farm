@@ -1,0 +1,5 @@
+@import '@dairy/theme/fonts.css';
+@import '@dairy/theme/tailwind.css';
+
+/* Tell Tailwind to scan the shared UI package for class names. */
+@source '../../../../packages/ui/src';
