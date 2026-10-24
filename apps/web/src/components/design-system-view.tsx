@@ -30,6 +30,7 @@ import {
 import { Droplets, Plus } from 'lucide-react';
 import { useState, type ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
+import { DesignSystemExtras } from './design-system-extras';
 
 const STATUSES: AnimalStatus[] = ['lactating', 'dry', 'pregnant', 'calf', 'sick', 'inactive'];
 
@@ -158,6 +159,8 @@ export function DesignSystemView() {
           </Field>
         </div>
       </Section>
+
+      <DesignSystemExtras />
 
       <Section title={t('ds.sectionStates')}>
         <div className="grid gap-4 lg:grid-cols-2">
