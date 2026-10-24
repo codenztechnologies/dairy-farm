@@ -47,7 +47,7 @@ export const tokens = {
       "tintGreenBg": "#e1f6ef",
       "tintGreenFg": "#017d54",
       "tintBlueBg": "#e6f1fd",
-      "tintBlueFg": "#1a6fd0",
+      "tintBlueFg": "#1565c0",
       "tintAmberBg": "#fff4dc",
       "tintAmberFg": "#9a5906",
       "tintVioletBg": "#f1eafe",
