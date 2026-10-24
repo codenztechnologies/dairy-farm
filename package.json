@@ -13,6 +13,8 @@
     "typecheck": "turbo run typecheck",
     "test": "turbo run test",
     "check:contrast": "node packages/theme/scripts/check-contrast.mjs",
+    "check:tokens": "node packages/theme/scripts/gen-native-tokens.mjs --check",
+    "gen:tokens": "node packages/theme/scripts/gen-native-tokens.mjs",
     "prepare": "husky",
     "setup:env": "node scripts/setup-env.mjs",
     "services:up": "docker compose up -d --wait",

@@ -4,6 +4,8 @@
 // Rules referenced here are documented in docs/14-conventions.md and CLAUDE.md.
 import js from '@eslint/js';
 import importX from 'eslint-plugin-import-x';
+import jsxA11y from 'eslint-plugin-jsx-a11y';
+import reactHooks from 'eslint-plugin-react-hooks';
 import unicorn from 'eslint-plugin-unicorn';
 import globals from 'globals';
 import tseslint from 'typescript-eslint';
@@ -21,6 +23,7 @@ export const ignores = [
   '**/.expo/**',
   '**/*.generated.*',
   '.claude/skills/**',
+  '**/tokens.native.ts',
 ];
 
 /**
@@ -98,11 +101,12 @@ export function base(options = {}) {
 
 /**
  * Extra rules for code that renders UI (web, mobile, packages/ui):
- * tokens-only colours, i18n-only text, logical (RTL-safe) CSS.
- * Pair with the jsx-a11y rules added in E0.2 when the first React package exists.
+ * tokens-only colours, i18n-only text, logical (RTL-safe) CSS, accessibility and hooks correctness.
  */
 export function ui() {
   return [
+    { files: UI_FILES, ...jsxA11y.flatConfigs.strict },
+    { files: UI_FILES, ...reactHooks.configs.flat['recommended-latest'] },
     {
       files: UI_FILES,
       plugins: { dairy },

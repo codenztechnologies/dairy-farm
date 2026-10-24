@@ -79,10 +79,10 @@ pnpm test:e2e             # Playwright
 pnpm db:migrate           # apply migrations
 pnpm db:seed              # demo farm; use --large for 100 farms x 500 animals perf dataset
 pnpm gen:api-client       # regenerate typed client from OpenAPI
-pnpm gen:tokens           # regenerate tokens.native.ts from tokens.css
+pnpm gen:tokens           # regenerate theme.generated.css (Tailwind) and tokens.native.ts from tokens.css
 pnpm storybook
 ```
 
 ## Current status
 
-Planning complete (docs 00-16, tokens). Phase 0 in progress: E0.1 tooling written (workspace, shared lint config with project rules, hooks, docker compose, CI); Docker services and CI not yet run; see [docs/briefs/E0.1-monorepo-tooling.md](docs/briefs/E0.1-monorepo-tooling.md). Work epic by epic from the briefs. Update this section as epics and phases complete.
+Planning complete (docs 00-16, tokens). Phase 0 in progress. E0.1 tooling done (Docker services verified; GitHub CI not yet run). E0.2 slice 1 done: theme to Tailwind mapping, base UI kit, app shell, web app with sample dashboard and `/design-system`, Urdu/RTL and dark mode reviewed in the browser. Next: E0.2 slice 2 (forms, overlays, data table, charts, Storybook); see [docs/briefs/E0.2-theme-and-ui-kit.md](docs/briefs/E0.2-theme-and-ui-kit.md). Update this section as epics and phases complete.

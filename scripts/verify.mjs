@@ -6,6 +6,7 @@ import { mkdirSync, writeFileSync } from 'node:fs';
 
 const STEPS = [
   { name: 'contrast', cmd: 'pnpm', args: ['check:contrast'] },
+  { name: 'tokens', cmd: 'pnpm', args: ['check:tokens'] },
   { name: 'format', cmd: 'pnpm', args: ['format:check'] },
   { name: 'lint', cmd: 'pnpm', args: ['lint'] },
   { name: 'typecheck', cmd: 'pnpm', args: ['typecheck'] },

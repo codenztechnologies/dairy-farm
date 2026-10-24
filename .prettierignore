@@ -10,3 +10,5 @@ Mockups
 docs
 CLAUDE.md
 README.md
+packages/theme/theme.generated.css
+packages/theme/tokens.native.ts

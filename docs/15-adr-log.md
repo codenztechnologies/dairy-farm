@@ -98,6 +98,11 @@ Format: ID, decision, context, alternatives, consequences. New decisions get the
 - **DB roles from day one:** `dairy_owner` (migrations) and `dairy_app` (runtime, `NOBYPASSRLS`) in local Postgres, mirroring the Neon setup so RLS behaves the same locally.
 - **Node tests for lint rules:** custom ESLint rules are tested with `node:test` + ESLint `RuleTester` (no extra test dependency in `packages/config`).
 
+## ADR-020 Tokens reach Tailwind through a generated mapping
+- **Context:** tokens.css must stay the single source (also feeding React Native), while Tailwind v4 only creates utilities for variables declared in `@theme`.
+- **Decision:** `pnpm gen:tokens` generates `theme.generated.css` (a `@theme inline` block with identical names) and `tokens.native.ts`. `pnpm verify` fails if they are stale. `--color-*: initial` removes Tailwind's default palette so raw colours cannot be used.
+- **Consequences:** Re-theming is one file. tokens.css must remain unlayered so its values win over the same-named theme declarations. Generated files are never edited by hand.
+
 ## ADR-016 Hosting: containers on VPS/cloud with managed data services
 - **Decision:** Docker, managed Postgres/Redis/S3, Cloudflare; Kubernetes deferred.
 - **Consequences:** Low cost and operational simplicity; clear scaling path in docs/13.

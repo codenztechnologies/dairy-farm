@@ -7,6 +7,7 @@
   "exports": {
     "./eslint": "./eslint/index.js",
     "./eslint/plugin": "./eslint/plugin.js",
+    "./tsconfig/base.json": "./tsconfig/base.json",
     "./tsconfig/node.json": "./tsconfig/node.json",
     "./tsconfig/react-lib.json": "./tsconfig/react-lib.json",
     "./tsconfig/next.json": "./tsconfig/next.json",
@@ -19,6 +20,8 @@
   "dependencies": {
     "@eslint/js": "10.0.1",
     "eslint-plugin-import-x": "4.17.1",
+    "eslint-plugin-jsx-a11y": "6.10.2",
+    "eslint-plugin-react-hooks": "7.1.1",
     "eslint-plugin-unicorn": "79.0.0",
     "globals": "17.13.0",
     "typescript-eslint": "8.72.0"
