@@ -216,7 +216,13 @@
     "sectionSync": "Sync and offline",
     "openPalette": "Open search (Ctrl K)",
     "paletteGoDesign": "Design system",
-    "paletteAnimal": "PK-1042 Rani"
+    "paletteAnimal": "PK-1042 Rani",
+    "sectionTableExtras": "Table with search, filter and export",
+    "searchAnimals": "Search by tag or name",
+    "filterStatus": "Status",
+    "allStatuses": "All statuses",
+    "serverTableTitle": "Server-side table (page and sort handled by the server)",
+    "serverBusy": "Loading page"
   },
   "roles": {
     "manager": "Manager"
@@ -235,7 +241,9 @@
     "pageOf": "Page {page} of {pages}",
     "selected": "{count, plural, one {# row selected} other {# rows selected}}",
     "selectAll": "Select all rows on this page",
-    "selectRow": "Select row"
+    "selectRow": "Select row",
+    "clearSearch": "Clear search",
+    "exportCsv": "Export CSV"
   },
   "chart": {
     "viewAsTable": "View as table",
@@ -263,7 +271,9 @@
   },
   "form": {
     "stepDone": "completed",
-    "summaryTitle": "{count, plural, one {Fix # problem before saving} other {Fix # problems before saving}}"
+    "summaryTitle": "{count, plural, one {Fix # problem before saving} other {Fix # problems before saving}}",
+    "showPassword": "Show password",
+    "hidePassword": "Hide password"
   },
   "healthScore": {
     "good": "Good",
@@ -298,5 +308,30 @@
     "notifStockBody": "About 2 days of feed left",
     "minutesAgo": "{count, plural, one {# minute ago} other {# minutes ago}}",
     "hoursAgo": "{count, plural, one {# hour ago} other {# hours ago}}"
+  },
+  "validation": {
+    "required": "This field is required.",
+    "tooLong": "That is too long. Use at most {max} characters.",
+    "invalidIdentifier": "Enter a valid email address or mobile number.",
+    "loginIdentifierRequired": "Enter your email or mobile number.",
+    "loginPasswordRequired": "Enter your password.",
+    "passwordTooShort": "Use at least {min} characters."
+  },
+  "login": {
+    "title": "Sign in",
+    "subtitle": "Use the email or mobile number your farm owner added.",
+    "identifierLabel": "Email or mobile number",
+    "identifierPlaceholder": "name@example.com or 0300 1234567",
+    "passwordLabel": "Password",
+    "submit": "Sign in",
+    "submitting": "Signing in",
+    "invalidCredentials": "That email, number or password is not right. Check it and try again.",
+    "rateLimited": "Too many attempts. Wait a few minutes, then try again.",
+    "serverError": "We could not sign you in because of a problem on our side. Try again in a moment.",
+    "networkError": "We can't reach the server. Check your internet connection and try again.",
+    "successTitle": "Signed in",
+    "successBody": "Preview only: real sign-in arrives with the account system.",
+    "previewNote": "Preview screen. No account system is connected yet, so nothing is saved.",
+    "welcome": "Welcome back"
   }
 }

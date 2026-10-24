@@ -216,7 +216,13 @@
     "sectionSync": "ہم آہنگی اور آف لائن",
     "openPalette": "تلاش کھولیں (Ctrl K)",
     "paletteGoDesign": "ڈیزائن سسٹم",
-    "paletteAnimal": "PK-1042 رانی"
+    "paletteAnimal": "PK-1042 رانی",
+    "sectionTableExtras": "تلاش، فلٹر اور برآمد والا جدول",
+    "searchAnimals": "ٹیگ یا نام سے تلاش کریں",
+    "filterStatus": "حالت",
+    "allStatuses": "تمام حالتیں",
+    "serverTableTitle": "سرور سائیڈ جدول (صفحہ اور ترتیب سرور سنبھالتا ہے)",
+    "serverBusy": "صفحہ لوڈ ہو رہا ہے"
   },
   "roles": {
     "manager": "منیجر"
@@ -235,7 +241,9 @@
     "pageOf": "صفحہ {page} از {pages}",
     "selected": "{count, plural, one {# قطار منتخب} other {# قطاریں منتخب}}",
     "selectAll": "اس صفحے کی تمام قطاریں منتخب کریں",
-    "selectRow": "قطار منتخب کریں"
+    "selectRow": "قطار منتخب کریں",
+    "clearSearch": "تلاش صاف کریں",
+    "exportCsv": "سی ایس وی برآمد کریں"
   },
   "chart": {
     "viewAsTable": "جدول کے طور پر دیکھیں",
@@ -263,7 +271,9 @@
   },
   "form": {
     "stepDone": "مکمل",
-    "summaryTitle": "{count, plural, one {محفوظ کرنے سے پہلے # مسئلہ ٹھیک کریں} other {محفوظ کرنے سے پہلے # مسائل ٹھیک کریں}}"
+    "summaryTitle": "{count, plural, one {محفوظ کرنے سے پہلے # مسئلہ ٹھیک کریں} other {محفوظ کرنے سے پہلے # مسائل ٹھیک کریں}}",
+    "showPassword": "پاس ورڈ دکھائیں",
+    "hidePassword": "پاس ورڈ چھپائیں"
   },
   "healthScore": {
     "good": "اچھا",
@@ -298,5 +308,30 @@
     "notifStockBody": "تقریباً 2 دن کا چارہ باقی ہے",
     "minutesAgo": "{count, plural, one {# منٹ پہلے} other {# منٹ پہلے}}",
     "hoursAgo": "{count, plural, one {# گھنٹہ پہلے} other {# گھنٹے پہلے}}"
+  },
+  "validation": {
+    "required": "یہ خانہ پُر کرنا ضروری ہے۔",
+    "tooLong": "یہ بہت لمبا ہے۔ زیادہ سے زیادہ {max} حروف استعمال کریں۔",
+    "invalidIdentifier": "درست ای میل پتہ یا موبائل نمبر درج کریں۔",
+    "loginIdentifierRequired": "اپنا ای میل یا موبائل نمبر درج کریں۔",
+    "loginPasswordRequired": "اپنا پاس ورڈ درج کریں۔",
+    "passwordTooShort": "کم از کم {min} حروف استعمال کریں۔"
+  },
+  "login": {
+    "title": "سائن اِن کریں",
+    "subtitle": "وہ ای میل یا موبائل نمبر استعمال کریں جو فارم کے مالک نے شامل کیا ہے۔",
+    "identifierLabel": "ای میل یا موبائل نمبر",
+    "identifierPlaceholder": "name@example.com یا 0300 1234567",
+    "passwordLabel": "پاس ورڈ",
+    "submit": "سائن اِن کریں",
+    "submitting": "سائن اِن ہو رہا ہے",
+    "invalidCredentials": "ای میل، نمبر یا پاس ورڈ درست نہیں۔ دوبارہ جانچ کر کوشش کریں۔",
+    "rateLimited": "بہت زیادہ کوششیں ہو گئیں۔ چند منٹ انتظار کریں، پھر دوبارہ کوشش کریں۔",
+    "serverError": "ہماری طرف سے مسئلے کی وجہ سے سائن اِن نہیں ہو سکا۔ کچھ دیر بعد دوبارہ کوشش کریں۔",
+    "networkError": "سرور تک رسائی نہیں ہو رہی۔ اپنا انٹرنیٹ دیکھیں اور دوبارہ کوشش کریں۔",
+    "successTitle": "سائن اِن ہو گیا",
+    "successBody": "صرف نمونہ: اصل سائن اِن اکاؤنٹ سسٹم کے ساتھ آئے گا۔",
+    "previewNote": "نمونے کی اسکرین۔ ابھی کوئی اکاؤنٹ سسٹم جڑا ہوا نہیں، اس لیے کچھ محفوظ نہیں ہوتا۔",
+    "welcome": "خوش آمدید"
   }
 }
