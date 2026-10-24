@@ -1,0 +1,67 @@
+# Local development services only. Production uses managed Neon/Redis/S3 (docs/13).
+# Credentials come from .env (generate with `pnpm setup:env`); nothing secret lives in this file.
+name: dairy-farm
+
+services:
+  postgres:
+    image: postgres:16.15-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ${POSTGRES_SUPERUSER_PASSWORD:?run pnpm setup:env}
+      DB_OWNER_PASSWORD: ${DB_OWNER_PASSWORD:?run pnpm setup:env}
+      DB_APP_PASSWORD: ${DB_APP_PASSWORD:?run pnpm setup:env}
+    ports:
+      - '127.0.0.1:${POSTGRES_PORT:-5432}:5432'
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      - ./infra/docker/postgres/init.sh:/docker-entrypoint-initdb.d/10-init.sh:ro
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U postgres -d dairy_dev']
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  redis:
+    image: redis:8.8.3-alpine
+    restart: unless-stopped
+    command:
+      [
+        'redis-server',
+        '--appendonly',
+        'yes',
+        '--requirepass',
+        '${REDIS_PASSWORD:?run pnpm setup:env}',
+      ]
+    ports:
+      - '127.0.0.1:${REDIS_PORT:-6379}:6379'
+    volumes:
+      - redis-data:/data
+    healthcheck:
+      test: ['CMD-SHELL', 'redis-cli -a "$$REDIS_PASSWORD" ping | grep -q PONG']
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    environment:
+      REDIS_PASSWORD: ${REDIS_PASSWORD}
+
+  # S3-compatible object storage for local development (uploads, exports, backups drills).
+  s3:
+    image: rustfs/rustfs:1.0.3
+    restart: unless-stopped
+    environment:
+      RUSTFS_ACCESS_KEY: ${S3_ACCESS_KEY:?run pnpm setup:env}
+      RUSTFS_SECRET_KEY: ${S3_SECRET_KEY:?run pnpm setup:env}
+      RUSTFS_ADDRESS: ':9000'
+      RUSTFS_CONSOLE_ENABLE: 'true'
+    command: ['/data']
+    ports:
+      - '127.0.0.1:${S3_PORT:-9000}:9000'
+      - '127.0.0.1:${S3_CONSOLE_PORT:-9001}:9001'
+    volumes:
+      - s3-data:/data
+
+volumes:
+  postgres-data:
+  redis-data:
+  s3-data:
