@@ -36,34 +36,11 @@ import {
 } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import {
-  createContext,
-  use,
-  useCallback,
-  useMemo,
-  useState,
-  useSyncExternalStore,
-  type ReactNode,
-} from 'react';
+import { createContext, use, useCallback, useMemo, useState, type ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
-import {
-  LOCALE_COOKIE,
-  THEME_COOKIE,
-  writePreferenceCookie,
-  type ThemeName,
-} from '@/lib/preferences';
-
-function subscribeSystemTheme(onChange: () => void): () => void {
-  const query = window.matchMedia('(prefers-color-scheme: dark)');
-  query.addEventListener('change', onChange);
-  return () => {
-    query.removeEventListener('change', onChange);
-  };
-}
-
-function getSystemDark(): boolean {
-  return window.matchMedia('(prefers-color-scheme: dark)').matches;
-}
+import type { ThemeName } from '@/lib/preferences';
+import { PREVIEW_ROUTES } from '@/lib/preview';
+import { usePreferences } from '@/lib/use-preferences';
 
 const PaletteContext = createContext<() => void>(() => undefined);
 
@@ -72,7 +49,7 @@ export function useOpenPalette(): () => void {
   return use(PaletteContext);
 }
 
-const SHOW_DESIGN_SYSTEM = process.env.NODE_ENV !== 'production';
+const SHOW_DESIGN_SYSTEM = PREVIEW_ROUTES;
 
 function Brand({ collapsed }: { collapsed: boolean }) {
   return (
@@ -110,10 +87,7 @@ export function AppFrame({
     setPaletteOpen((open) => !open);
   }, []);
   useCommandShortcut(togglePalette);
-  const systemDark = useSyncExternalStore(subscribeSystemTheme, getSystemDark, () => false);
-  const [choice, setChoice] = useState<ThemeName | undefined>(initialTheme);
-  // Without a saved choice the CSS follows the OS setting; mirror it for the toggle icon.
-  const theme: ThemeName = choice ?? (systemDark ? 'dark' : 'light');
+  const { theme, toggleTheme, changeLocale } = usePreferences(initialTheme);
 
   const item = (id: string, icon: NavItem['icon'], href: string): NavItem => ({
     id,
@@ -183,18 +157,6 @@ export function AppFrame({
       })),
     },
   ];
-
-  function changeLocale(next: Locale) {
-    writePreferenceCookie(LOCALE_COOKIE, next);
-    router.refresh();
-  }
-
-  function toggleTheme() {
-    const next: ThemeName = theme === 'dark' ? 'light' : 'dark';
-    setChoice(next);
-    document.documentElement.dataset.theme = next;
-    writePreferenceCookie(THEME_COOKIE, next);
-  }
 
   return (
     <AppShell

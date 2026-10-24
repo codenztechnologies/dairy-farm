@@ -33,6 +33,7 @@ import { useTranslation } from 'react-i18next';
 import { useOpenPalette } from './app-frame';
 import { DesignSystemExtras } from './design-system-extras';
 import { DesignSystemSlice3 } from './design-system-slice3';
+import { DesignSystemTable } from './design-system-table';
 
 const STATUSES: AnimalStatus[] = ['lactating', 'dry', 'pregnant', 'calf', 'sick', 'inactive'];
 
@@ -165,6 +166,7 @@ export function DesignSystemView() {
 
       <DesignSystemExtras />
       <DesignSystemSlice3 onOpenPalette={openPalette} />
+      <DesignSystemTable />
 
       <Section title={t('ds.sectionStates')}>
         <div className="grid gap-4 lg:grid-cols-2">

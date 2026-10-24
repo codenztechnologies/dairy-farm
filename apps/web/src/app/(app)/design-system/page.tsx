@@ -1,7 +1,8 @@
 import { notFound } from 'next/navigation';
 import { DesignSystemView } from '@/components/design-system-view';
+import { PREVIEW_ROUTES } from '@/lib/preview';
 
 export default function DesignSystemPage() {
-  if (process.env.NODE_ENV === 'production') notFound();
+  if (!PREVIEW_ROUTES) notFound();
   return <DesignSystemView />;
 }

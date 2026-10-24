@@ -153,6 +153,7 @@ export function DesignSystemSlice3({ onOpenPalette }: { onOpenPalette: () => voi
             ]}
           />
           <Popover
+            label={t('ds.openPopover')}
             trigger={<Button>{t('ds.openPopover')}</Button>}
             className="w-72 p-4"
             align="start"
