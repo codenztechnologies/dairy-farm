@@ -20,6 +20,9 @@ export const ignores = [
   '**/.next/**',
   '**/.turbo/**',
   '**/coverage/**',
+  '**/storybook-static/**',
+  '**/playwright-report/**',
+  '**/test-results/**',
   '**/.expo/**',
   '**/*.generated.*',
   '.claude/skills/**',
@@ -124,12 +127,28 @@ export function ui() {
 export function tests() {
   return [
     {
-      files: ['**/*.{test,spec}.{ts,tsx,js}', '**/tests/**', '**/e2e/**'],
+      files: [
+        '**/*.{test,spec}.{ts,tsx,js}',
+        '**/*.stories.{ts,tsx}',
+        '**/.storybook/**',
+        '**/tests/**',
+        '**/e2e/**',
+      ],
       rules: {
         'dairy/no-hardcoded-text': 'off',
         'dairy/no-hardcoded-colors': 'off',
         '@typescript-eslint/no-non-null-assertion': 'off',
       },
+    },
+  ];
+}
+
+/** Storybook stories keep demo state inside `render`, which is the normal pattern there. */
+export function stories() {
+  return [
+    {
+      files: ['**/*.stories.{ts,tsx}', '**/.storybook/**'],
+      rules: { 'react-hooks/rules-of-hooks': 'off' },
     },
   ];
 }
