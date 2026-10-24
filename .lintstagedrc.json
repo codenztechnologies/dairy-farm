@@ -1,0 +1,8 @@
+{
+  "*.{js,mjs,cjs,ts,tsx,mts,cts}": [
+    "eslint --max-warnings=0 --no-warn-ignored",
+    "prettier --check"
+  ],
+  "*.{json,css,yml,yaml}": ["prettier --check"],
+  "packages/theme/tokens.css": ["node packages/theme/scripts/check-contrast.mjs"]
+}
