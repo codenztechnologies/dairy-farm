@@ -4,6 +4,8 @@ import { cn } from '../lib/cn';
 
 export interface FieldContextValue {
   id: string;
+  /** Id of the <label>; trigger buttons use it with aria-labelledby so the value is announced too. */
+  labelId: string;
   describedBy: string | undefined;
   invalid: boolean;
   required: boolean;
@@ -29,14 +31,15 @@ interface FieldProps {
 export function Field({ label, required = false, helper, error, children, className }: FieldProps) {
   const { t } = useTranslation();
   const id = useId();
+  const labelId = `${id}-label`;
   const helperId = helper ? `${id}-helper` : undefined;
   const errorId = error ? `${id}-error` : undefined;
   const describedBy = [errorId, helperId].filter(Boolean).join(' ') || undefined;
 
   return (
-    <FieldContext value={{ id, describedBy, invalid: Boolean(error), required }}>
+    <FieldContext value={{ id, labelId, describedBy, invalid: Boolean(error), required }}>
       <div className={cn('flex flex-col gap-1.5', className)}>
-        <label htmlFor={id} className="text-sm font-medium text-text">
+        <label id={labelId} htmlFor={id} className="text-sm font-medium text-text">
           {label}
           {required ? (
             <>

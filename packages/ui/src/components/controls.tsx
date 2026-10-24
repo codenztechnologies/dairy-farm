@@ -5,9 +5,9 @@ import {
   Select as RadixSelect,
   Switch as RadixSwitch,
 } from 'radix-ui';
+import { useId, type ReactNode } from 'react';
 import { cn } from '../lib/cn';
 import { TextInput, useFieldContext, type TextInputProps } from './field';
-import type { ReactNode } from 'react';
 
 // Select ---------------------------------------------------------------------------------------
 
@@ -24,6 +24,10 @@ interface SelectProps {
   placeholder: string;
   disabled?: boolean;
   className?: string;
+  /** Accessible name when used without a Field (e.g. inside PhoneInput). */
+  ariaLabel?: string;
+  /** Ignore the surrounding Field: this select is a sub-control of a composite input. */
+  standalone?: boolean;
 }
 
 /** Single choice from a short list. For long or searchable lists use Combobox (next slice). */
@@ -34,8 +38,12 @@ export function Select({
   placeholder,
   disabled,
   className,
+  ariaLabel,
+  standalone = false,
 }: SelectProps) {
-  const field = useFieldContext();
+  const outer = useFieldContext();
+  const field = standalone ? null : outer;
+  const valueId = useId();
   const invalid = field?.invalid ?? false;
   return (
     <RadixSelect.Root
@@ -45,6 +53,8 @@ export function Select({
     >
       <RadixSelect.Trigger
         id={field?.id}
+        {...(field ? { 'aria-labelledby': `${field.labelId} ${valueId}` } : {})}
+        {...(ariaLabel ? { 'aria-label': ariaLabel } : {})}
         aria-describedby={field?.describedBy}
         aria-invalid={invalid || undefined}
         className={cn(
@@ -55,7 +65,7 @@ export function Select({
           className,
         )}
       >
-        <RadixSelect.Value placeholder={placeholder} />
+        <RadixSelect.Value id={valueId} placeholder={placeholder} />
         <RadixSelect.Icon>
           <ChevronDown className="size-4 text-text-muted" aria-hidden />
         </RadixSelect.Icon>
