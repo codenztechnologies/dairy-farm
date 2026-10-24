@@ -1,0 +1,455 @@
+/*
+ * THEME TOKENS - the single source of truth for every visual value.
+ * Visual direction: follows the approved mockups in /mockups (clean, light, emerald + sky blue on cool white).
+ *
+ * Rules
+ *  1. Components and apps NEVER hard-code colors, fonts, radii, shadows, spacing or durations.
+ *     They use semantic tokens (--color-*, --space-*, --radius-*, ...) only.
+ *  2. Layers:  primitives (--p-*)  ->  semantic (--color-*)  ->  component tokens (in the component).
+ *     To re-theme: edit primitives, or re-map semantic tokens. Nothing else changes.
+ *  3. Format is constrained (one `--name: value;` per line inside :root blocks) so the
+ *     native build script can generate `tokens.native.ts` for React Native from this file.
+ *  4. Dark mode: [data-theme="dark"]. Right-to-left: dir="rtl" (use logical CSS properties).
+ *  5. Contrast is enforced by scripts/check-contrast.mjs. The mockup brand green (#018F5E) is
+ *     4.12:1 with white text, so button fills use --p-emerald-600 (#017D54, 5.17:1) instead.
+ */
+
+:root {
+  /* ---------- Primitives: Emerald (brand) ---------- */
+  --p-emerald-50: #effaf5;
+  --p-emerald-100: #e1f6ef;
+  --p-emerald-200: #b9e9d7;
+  --p-emerald-300: #7fd3b3;
+  --p-emerald-400: #2fb283;
+  --p-emerald-500: #018f5e;
+  --p-emerald-600: #017d54;
+  --p-emerald-700: #016646;
+  --p-emerald-800: #014f37;
+  --p-emerald-900: #02392a;
+
+  /* ---------- Primitives: Sky (milk, info, secondary) ---------- */
+  --p-sky-50: #f2f8fe;
+  --p-sky-100: #e6f1fd;
+  --p-sky-200: #bfdcf9;
+  --p-sky-300: #9ccbf7;
+  --p-sky-350: #3d97f0;
+  --p-sky-400: #4a9df2;
+  --p-sky-500: #1a7fe0;
+  --p-sky-600: #1a6fd0;
+  --p-sky-700: #1565c0;
+  --p-sky-800: #0f4d96;
+
+  /* ---------- Primitives: Amber (dry, warnings) ---------- */
+  --p-amber-100: #fff4dc;
+  --p-amber-400: #f0b040;
+  --p-amber-600: #c27c06;
+  --p-amber-700: #9a5906;
+
+  /* ---------- Primitives: Violet (pregnant) ---------- */
+  --p-violet-100: #f1eafe;
+  --p-violet-500: #8a45e8;
+  --p-violet-700: #6b35cc;
+
+  /* ---------- Primitives: Rose (danger, sick) ---------- */
+  --p-rose-100: #fdecee;
+  --p-rose-500: #e5384a;
+  --p-rose-600: #c2253a;
+  --p-rose-700: #a31c2f;
+
+  /* ---------- Primitives: Slate (neutrals, cool) ---------- */
+  --p-slate-0: #ffffff;
+  --p-slate-50: #f7f9fd;
+  --p-slate-100: #eef2f8;
+  --p-slate-200: #e2e8f0;
+  --p-slate-300: #cbd5e1;
+  --p-slate-400: #a3aebd;
+  --p-slate-500: #7d8ca1;
+  --p-slate-600: #5f6f85;
+  --p-slate-700: #526071;
+  --p-slate-800: #334155;
+  --p-slate-900: #0f172a;
+
+  /* ---------- Primitives: Night (dark mode neutrals) ---------- */
+  --p-night-950: #070b14;
+  --p-night-900: #0b1220;
+  --p-night-800: #111a2b;
+  --p-night-700: #17233a;
+  --p-night-600: #22314a;
+  --p-night-500: #33445f;
+  --p-night-400: #64778f;
+
+  /* ---------- Typography ---------- */
+  --font-display: 'Inter', 'Noto Naskh Arabic', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-body: 'Inter', 'Noto Naskh Arabic', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
+  --font-urdu-display: 'Noto Naskh Arabic', 'Noto Sans Arabic', system-ui, sans-serif;
+  --font-urdu-body: 'Noto Naskh Arabic', 'Noto Sans Arabic', system-ui, sans-serif;
+
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-md: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 1.875rem;
+  --text-4xl: 2.25rem;
+  --text-5xl: 3rem;
+
+  --leading-tight: 1.2;
+  --leading-snug: 1.35;
+  --leading-normal: 1.5;
+  --leading-urdu: 2;
+
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+
+  --tracking-tight: -0.015em;
+  --tracking-normal: 0;
+  --tracking-wide: 0.05em;
+
+  /* ---------- Spacing (4px base) ---------- */
+  --space-0: 0;
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+
+  /* ---------- Shape ---------- */
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 20px;
+  --radius-full: 999px;
+
+  --border-width: 1px;
+  --border-width-strong: 2px;
+  --focus-ring-width: 3px;
+  --focus-ring-offset: 2px;
+
+  /* ---------- Layout ---------- */
+  --sidebar-width: 13rem;
+  --sidebar-width-collapsed: 4.5rem;
+  --content-max-width: 96rem;
+  --header-height: 4.125rem;
+  --touch-target-min: 2.75rem;
+  --touch-target-native: 3rem;
+  --touch-gap-min: 0.5rem;
+  --control-height-sm: 2.25rem;
+  --control-height-md: 2.75rem;
+  --control-height-lg: 3.25rem;
+
+  /* ---------- Breakpoints (reference values; use in JS and container queries) ---------- */
+  --bp-sm: 40rem;
+  --bp-md: 48rem;
+  --bp-lg: 64rem;
+  --bp-xl: 80rem;
+
+  /* ---------- Motion ---------- */
+  --duration-instant: 90ms;
+  --duration-fast: 140ms;
+  --duration-base: 220ms;
+  --duration-slow: 360ms;
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --ease-emphasized: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-exit: cubic-bezier(0.4, 0, 1, 1);
+
+  /* ---------- Z-index ---------- */
+  --z-sticky: 20;
+  --z-dropdown: 40;
+  --z-overlay: 60;
+  --z-modal: 70;
+  --z-toast: 90;
+
+  /* ---------- Density (data tables) ---------- */
+  --row-height-comfortable: 3.5rem;
+  --row-height-compact: 2.5rem;
+}
+
+/* =====================================================================
+ * SEMANTIC TOKENS - LIGHT (default)
+ * ===================================================================== */
+:root,
+[data-theme='light'] {
+  color-scheme: light;
+
+  --color-bg: var(--p-slate-50);
+  --color-bg-sunken: var(--p-slate-100);
+  --color-surface: var(--p-slate-0);
+  --color-surface-raised: var(--p-slate-0);
+  --color-surface-inverse: var(--p-slate-900);
+
+  --color-text: var(--p-slate-900);
+  --color-text-muted: var(--p-slate-700);
+  --color-text-subtle: var(--p-slate-600);
+  --color-text-disabled: var(--p-slate-400);
+  --color-text-inverse: var(--p-slate-0);
+  --color-text-link: var(--p-sky-600);
+
+  --color-border: var(--p-slate-200);
+  --color-border-strong: var(--p-slate-300);
+  --color-border-input: var(--p-slate-500);
+  --color-divider: var(--p-slate-100);
+
+  --color-primary: var(--p-emerald-600);
+  --color-primary-hover: var(--p-emerald-700);
+  --color-primary-active: var(--p-emerald-800);
+  --color-primary-soft: var(--p-emerald-100);
+  --color-primary-softer: var(--p-emerald-50);
+  --color-on-primary: #ffffff;
+
+  --color-accent: var(--p-sky-600);
+  --color-accent-hover: var(--p-sky-700);
+  --color-accent-soft: var(--p-sky-100);
+  --color-on-accent: #ffffff;
+
+  --color-nav-active-bg: var(--p-emerald-100);
+  --color-nav-active-text: var(--p-emerald-700);
+
+  --color-success: var(--p-emerald-600);
+  --color-success-soft: var(--p-emerald-100);
+  --color-warning: var(--p-amber-700);
+  --color-warning-soft: var(--p-amber-100);
+  --color-danger: var(--p-rose-600);
+  --color-danger-hover: var(--p-rose-700);
+  --color-danger-soft: var(--p-rose-100);
+  --color-info: var(--p-sky-700);
+  --color-info-soft: var(--p-sky-100);
+
+  --color-focus-ring: var(--p-sky-500);
+  --color-overlay: rgb(15 23 42 / 0.5);
+  --color-skeleton-base: var(--p-slate-100);
+  --color-skeleton-shine: var(--p-slate-0);
+  --color-selection: var(--p-emerald-200);
+
+  /* KPI/icon tiles: soft tinted square behind a colored icon (pairs: -bg / -fg) */
+  --tint-green-bg: var(--p-emerald-100);
+  --tint-green-fg: var(--p-emerald-600);
+  --tint-blue-bg: var(--p-sky-100);
+  --tint-blue-fg: var(--p-sky-600);
+  --tint-amber-bg: var(--p-amber-100);
+  --tint-amber-fg: var(--p-amber-700);
+  --tint-violet-bg: var(--p-violet-100);
+  --tint-violet-fg: var(--p-violet-700);
+  --tint-rose-bg: var(--p-rose-100);
+  --tint-rose-fg: var(--p-rose-600);
+  --tint-slate-bg: var(--p-slate-100);
+  --tint-slate-fg: var(--p-slate-700);
+
+  /* Domain colors (animal status chips; always shown with a text label, never color alone) */
+  --color-status-lactating: var(--p-emerald-700);
+  --color-status-lactating-soft: var(--p-emerald-100);
+  --color-status-dry: var(--p-amber-700);
+  --color-status-dry-soft: var(--p-amber-100);
+  --color-status-pregnant: var(--p-violet-700);
+  --color-status-pregnant-soft: var(--p-violet-100);
+  --color-status-sick: var(--p-rose-600);
+  --color-status-sick-soft: var(--p-rose-100);
+  --color-status-calf: var(--p-sky-700);
+  --color-status-calf-soft: var(--p-sky-100);
+  --color-status-inactive: var(--p-slate-600);
+  --color-status-inactive-soft: var(--p-slate-100);
+
+  /* Chart palette (categorical; every series >= 3:1 against --color-surface, measured; series are
+   * ALSO told apart by dash, marker and bar pattern below, never by colour alone).
+   * Meaning is fixed app-wide: milk = blue, income / totals / positive = green, cost = amber. */
+  --chart-1: var(--p-sky-500);
+  --chart-2: var(--p-emerald-600);
+  --chart-3: var(--p-amber-600);
+  --chart-4: var(--p-violet-500);
+  --chart-5: var(--p-rose-500);
+  --chart-6: var(--p-slate-500);
+  --chart-grid: var(--p-slate-200);
+  --chart-axis: var(--p-slate-700);
+
+  /* Milking sessions (stacked bars): one hue, three lightness steps; patterns separate them for
+   * colour-blind users and print. Order: morning (lightest), noon, evening (darkest). */
+  --chart-session-morning: var(--p-sky-350);
+  --chart-session-noon: var(--p-sky-700);
+  --chart-session-evening: var(--p-sky-800);
+
+  /* Non-colour series encodings: same order as --chart-1..6. Values are consumed by the <Chart> wrapper.
+   * dash = SVG-style dash array (0 = solid), marker = ECharts symbol, pattern = bar/area fill pattern id. */
+  --chart-dash-1: 0;
+  --chart-dash-2: 8 4;
+  --chart-dash-3: 2 3;
+  --chart-dash-4: 10 3 2 3;
+  --chart-dash-5: 14 4;
+  --chart-dash-6: 1 4;
+  --chart-marker-1: circle;
+  --chart-marker-2: rect;
+  --chart-marker-3: triangle;
+  --chart-marker-4: diamond;
+  --chart-marker-5: roundRect;
+  --chart-marker-6: pin;
+  --chart-pattern-1: solid;
+  --chart-pattern-2: diagonal-stripes;
+  --chart-pattern-3: dots;
+  --chart-pattern-4: horizontal-stripes;
+  --chart-pattern-5: crosshatch;
+  --chart-pattern-6: vertical-stripes;
+  --chart-seq-1: #e6f1fd;
+  --chart-seq-2: #bfdcf9;
+  --chart-seq-3: #7ab7f6;
+  --chart-seq-4: #1a7fe0;
+  --chart-seq-5: #0f4d96;
+
+  /* Elevation (cool, very light; cards rely on a 1px border first) */
+  --shadow-xs: 0 1px 1px rgb(15 23 42 / 0.04);
+  --shadow-sm: 0 1px 3px rgb(15 23 42 / 0.06), 0 1px 2px rgb(15 23 42 / 0.04);
+  --shadow-md: 0 6px 14px -4px rgb(15 23 42 / 0.1), 0 2px 4px -2px rgb(15 23 42 / 0.06);
+  --shadow-lg: 0 18px 32px -10px rgb(15 23 42 / 0.18), 0 6px 10px -6px rgb(15 23 42 / 0.08);
+}
+
+/* =====================================================================
+ * SEMANTIC TOKENS - DARK
+ * ===================================================================== */
+[data-theme='dark'] {
+  color-scheme: dark;
+
+  --color-bg: var(--p-night-900);
+  --color-bg-sunken: var(--p-night-950);
+  --color-surface: var(--p-night-800);
+  --color-surface-raised: var(--p-night-700);
+  --color-surface-inverse: #e6edf7;
+
+  --color-text: #e6edf7;
+  --color-text-muted: #a8b4c7;
+  --color-text-subtle: #8b98ad;
+  --color-text-disabled: #5b6b82;
+  --color-text-inverse: var(--p-night-900);
+  --color-text-link: #6cb4f7;
+
+  --color-border: var(--p-night-600);
+  --color-border-strong: var(--p-night-500);
+  --color-border-input: var(--p-night-400);
+  --color-divider: var(--p-night-700);
+
+  --color-primary: #34c997;
+  --color-primary-hover: #5ad8ae;
+  --color-primary-active: #86e6c7;
+  --color-primary-soft: rgb(52 201 151 / 0.16);
+  --color-primary-softer: rgb(52 201 151 / 0.08);
+  --color-on-primary: #06281c;
+
+  --color-accent: #5aa9f5;
+  --color-accent-hover: #86c0f8;
+  --color-accent-soft: rgb(90 169 245 / 0.16);
+  --color-on-accent: #06192e;
+
+  --color-nav-active-bg: rgb(52 201 151 / 0.16);
+  --color-nav-active-text: #5ad8ae;
+
+  --color-success: #34c997;
+  --color-success-soft: rgb(52 201 151 / 0.16);
+  --color-warning: #f2b94b;
+  --color-warning-soft: rgb(242 185 75 / 0.16);
+  --color-danger: #f26b78;
+  --color-danger-hover: #f58f99;
+  --color-danger-soft: rgb(242 107 120 / 0.16);
+  --color-info: #6cb4f7;
+  --color-info-soft: rgb(108 180 247 / 0.16);
+
+  --color-focus-ring: #6cb4f7;
+  --color-overlay: rgb(0 0 0 / 0.62);
+  --color-skeleton-base: var(--p-night-700);
+  --color-skeleton-shine: var(--p-night-600);
+  --color-selection: rgb(52 201 151 / 0.3);
+
+  --tint-green-bg: rgb(52 201 151 / 0.16);
+  --tint-green-fg: #34c997;
+  --tint-blue-bg: rgb(90 169 245 / 0.16);
+  --tint-blue-fg: #5aa9f5;
+  --tint-amber-bg: rgb(242 185 75 / 0.16);
+  --tint-amber-fg: #f2b94b;
+  --tint-violet-bg: rgb(169 139 245 / 0.16);
+  --tint-violet-fg: #a98bf5;
+  --tint-rose-bg: rgb(242 107 120 / 0.16);
+  --tint-rose-fg: #f26b78;
+  --tint-slate-bg: rgb(139 152 173 / 0.16);
+  --tint-slate-fg: #a8b4c7;
+
+  --color-status-lactating: #34c997;
+  --color-status-lactating-soft: rgb(52 201 151 / 0.16);
+  --color-status-dry: #f2b94b;
+  --color-status-dry-soft: rgb(242 185 75 / 0.16);
+  --color-status-pregnant: #a98bf5;
+  --color-status-pregnant-soft: rgb(169 139 245 / 0.16);
+  --color-status-sick: #f26b78;
+  --color-status-sick-soft: rgb(242 107 120 / 0.16);
+  --color-status-calf: #6cb4f7;
+  --color-status-calf-soft: rgb(108 180 247 / 0.16);
+  --color-status-inactive: #a8b4c7;
+  --color-status-inactive-soft: rgb(139 152 173 / 0.16);
+
+  --chart-1: #5aa9f5;
+  --chart-2: #34c997;
+  --chart-3: #f2b94b;
+  --chart-4: #a98bf5;
+  --chart-5: #f26b78;
+  --chart-6: #8b98ad;
+  --chart-grid: var(--p-night-600);
+  --chart-axis: #a8b4c7;
+  --chart-session-morning: #9ccbf7;
+  --chart-session-noon: #5aa9f5;
+  --chart-session-evening: #2d7fd8;
+  --chart-seq-1: #14233b;
+  --chart-seq-2: #1e3f6b;
+  --chart-seq-3: #2d7fd8;
+  --chart-seq-4: #5aa9f5;
+  --chart-seq-5: #bfdcf9;
+
+  --shadow-xs: 0 1px 1px rgb(0 0 0 / 0.3);
+  --shadow-sm: 0 1px 3px rgb(0 0 0 / 0.4);
+  --shadow-md: 0 6px 14px -4px rgb(0 0 0 / 0.5);
+  --shadow-lg: 0 18px 34px -10px rgb(0 0 0 / 0.6);
+}
+
+/* Follow the OS when the user has not chosen a theme explicitly */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    color-scheme: dark;
+  }
+}
+
+/* =====================================================================
+ * LANGUAGE / DIRECTION OVERRIDES
+ * ===================================================================== */
+:root[lang='ur'],
+[dir='rtl'] {
+  --font-display: var(--font-urdu-display);
+  --font-body: var(--font-urdu-body);
+  --leading-normal: var(--leading-urdu);
+  --leading-snug: 1.8;
+  --leading-tight: 1.6;
+  --tracking-tight: 0;
+  --tracking-wide: 0;
+}
+
+/* =====================================================================
+ * ACCESSIBILITY
+ * ===================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --duration-instant: 1ms;
+    --duration-fast: 1ms;
+    --duration-base: 1ms;
+    --duration-slow: 1ms;
+  }
+}
+
+@media (prefers-contrast: more) {
+  :root {
+    --color-border: var(--p-slate-300);
+    --color-text-muted: var(--p-slate-800);
+  }
+}
