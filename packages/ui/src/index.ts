@@ -65,3 +65,40 @@ export {
   ThemeToggle,
   UserMenu,
 } from './shell/top-bar';
+
+export { Chart } from './charts/chart';
+export { SessionsChart } from './charts/sessions-chart';
+export { useChartTheme, type ChartTheme } from './charts/use-chart-theme';
+
+export {
+  Checkbox,
+  MoneyInput,
+  NumberInput,
+  RadioPills,
+  Select,
+  Switch,
+  type SelectOption,
+} from './components/controls';
+export {
+  DataTable,
+  dataTableColumns,
+  dataTableFeatures,
+  type DataTableColumn,
+  type Density,
+} from './components/data-table';
+export {
+  DateTile,
+  DonutCard,
+  ListCard,
+  type DonutSlice,
+  type ListItem,
+} from './components/data-cards';
+export {
+  ConfirmDialog,
+  Dialog,
+  Sheet,
+  Tabs,
+  Tooltip,
+  TooltipProvider,
+} from './components/overlays';
+export { Toaster, toast, type ToastInput } from './components/toast';
