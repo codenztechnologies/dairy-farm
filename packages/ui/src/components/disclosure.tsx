@@ -8,11 +8,14 @@ import { cn } from '../lib/cn';
 
 export function Popover({
   trigger,
+  label,
   children,
   align = 'end',
   className,
 }: {
   trigger: ReactNode;
+  /** Accessible name of the popup (it is exposed as a dialog). */
+  label: string;
   children: ReactNode;
   align?: 'start' | 'center' | 'end';
   className?: string;
@@ -24,6 +27,7 @@ export function Popover({
         <RadixPopover.Content
           align={align}
           sideOffset={8}
+          aria-label={label}
           className={cn(
             'z-(--z-dropdown) rounded-md border border-border bg-surface-raised shadow-md outline-none',
             className,

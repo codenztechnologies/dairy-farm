@@ -89,7 +89,12 @@ export function DatePicker({
         <CalendarDays className="size-4 shrink-0 text-text-muted" aria-hidden />
       </RadixPopover.Trigger>
       <RadixPopover.Portal>
-        <RadixPopover.Content align="start" sideOffset={6} className={popoverContent}>
+        <RadixPopover.Content
+          align="start"
+          sideOffset={6}
+          aria-label={placeholder}
+          className={popoverContent}
+        >
           <DayPicker
             mode="single"
             dir={i18n.dir()}
@@ -398,6 +403,7 @@ export function Combobox({
         <RadixPopover.Content
           align="start"
           sideOffset={6}
+          aria-label={searchPlaceholder}
           className={cn(popoverContent, 'w-(--radix-popover-trigger-width) p-0')}
         >
           <Command shouldFilter={false} loop>
@@ -477,6 +483,7 @@ export function MultiSelect({
           <RadixPopover.Content
             align="start"
             sideOffset={6}
+            aria-label={searchPlaceholder}
             className={cn(popoverContent, 'w-(--radix-popover-trigger-width) p-0')}
           >
             <Command shouldFilter={false} loop>

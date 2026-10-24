@@ -2,7 +2,7 @@ import { act, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { useState } from 'react';
 import { describe, expect, it, vi } from 'vitest';
-import { renderWithI18n } from '../test/render';
+import { renderWithI18n } from '../testing/render';
 import { Button } from './button';
 import { Checkbox, MoneyInput, NumberInput, RadioPills, Switch } from './controls';
 import { DataTable, dataTableColumns } from './data-table';

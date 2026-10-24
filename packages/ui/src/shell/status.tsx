@@ -64,6 +64,7 @@ export function NotificationCenter({ items, onMarkAllRead, footer }: Notificatio
           ) : null}
         </button>
       }
+      label={t('topbar.notifications')}
       className="w-96 max-w-[calc(100vw-2rem)]"
     >
       <div className="flex items-center justify-between border-b border-border px-4 py-3">

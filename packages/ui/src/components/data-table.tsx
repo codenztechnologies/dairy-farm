@@ -2,6 +2,7 @@ import {
   createColumnHelper,
   createPaginatedRowModel,
   createSortedRowModel,
+  functionalUpdate,
   rowPaginationFeature,
   rowSelectionFeature,
   rowSortingFeature,
@@ -11,6 +12,7 @@ import {
   useTable,
   type ColumnDef,
   type RowData,
+  type SortingState,
 } from '@tanstack/react-table';
 import { ArrowDown, ArrowUp, ChevronLeft, ChevronRight, ChevronsUpDown } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
@@ -20,7 +22,7 @@ import { SkeletonRegion, SkeletonTable } from './skeleton';
 import { ErrorState, type ErrorStateProps } from './states';
 import type { ReactNode } from 'react';
 
-/** Features every DataTable has. Server-side tables will pass manual flags in a later slice. */
+/** Features every DataTable has. Server-side tables switch to manual mode through the `server` prop. */
 export const dataTableFeatures = tableFeatures({
   rowSortingFeature,
   rowSelectionFeature,
@@ -38,6 +40,23 @@ export function dataTableColumns<TData extends RowData>() {
 }
 
 export type Density = 'comfortable' | 'compact';
+
+/** What the server needs to return the right page: where we are and how it is sorted. */
+export interface ServerTableState {
+  pageIndex: number;
+  pageSize: number;
+  sorting: SortingState;
+}
+
+/**
+ * Server mode: the table shows exactly the rows it is given (one page, already sorted) and reports
+ * changes through `onStateChange`, so the caller refetches. `rowCount` is the total across all pages.
+ */
+export interface ServerTable {
+  rowCount: number;
+  state: ServerTableState;
+  onStateChange: (next: ServerTableState) => void;
+}
 
 interface DataTableProps<TData extends RowData> {
   data: readonly TData[];
@@ -57,6 +76,13 @@ interface DataTableProps<TData extends RowData> {
   /** Shown instead of rows when filters removed everything. */
   filteredEmpty?: ReactNode;
   onRowClick?: (row: TData) => void;
+  /** Column ids that hold numbers: right-aligned (start-aligned in RTL is wrong for digits, so `end`). */
+  numericColumns?: readonly string[];
+  /** True when filters or search are active: an empty result then shows `filteredEmpty`, not `empty`. */
+  filtered?: boolean;
+  /** Data is being refreshed (new page, new filter): keep the old rows visible but dimmed and busy. */
+  refreshing?: boolean;
+  server?: ServerTable;
   className?: string;
 }
 
@@ -74,6 +100,10 @@ export function DataTable<TData extends RowData>({
   empty,
   filteredEmpty,
   onRowClick,
+  numericColumns = [],
+  filtered = false,
+  refreshing = false,
+  server,
   className,
 }: DataTableProps<TData>) {
   const { t, i18n } = useTranslation();
@@ -86,7 +116,38 @@ export function DataTable<TData extends RowData>({
     getRowId,
     enableRowSelection: selectable,
     initialState: { pagination: { pageIndex: 0, pageSize } },
+    ...(server
+      ? {
+          manualPagination: true,
+          manualSorting: true,
+          rowCount: server.rowCount,
+          state: {
+            pagination: { pageIndex: server.state.pageIndex, pageSize: server.state.pageSize },
+            sorting: server.state.sorting,
+          },
+          onPaginationChange: (updater) => {
+            const next = functionalUpdate(updater, {
+              pageIndex: server.state.pageIndex,
+              pageSize: server.state.pageSize,
+            });
+            // A different page size or sort order starts again from the first page.
+            server.onStateChange({
+              ...server.state,
+              ...next,
+              pageIndex: next.pageSize === server.state.pageSize ? next.pageIndex : 0,
+            });
+          },
+          onSortingChange: (updater) => {
+            server.onStateChange({
+              ...server.state,
+              pageIndex: 0,
+              sorting: functionalUpdate(updater, server.state.sorting),
+            });
+          },
+        }
+      : {}),
   });
+  const numeric = new Set(numericColumns);
 
   if (loading) {
     return (
@@ -98,9 +159,13 @@ export function DataTable<TData extends RowData>({
   if (error)
     return <ErrorState {...error} className="rounded-lg border border-border bg-surface" />;
 
-  const rowCount = data.length;
-  if (rowCount === 0) {
-    return <div className="rounded-lg border border-border bg-surface">{empty}</div>;
+  const rowCount = server ? server.rowCount : data.length;
+  if (data.length === 0 && !refreshing) {
+    return (
+      <div className="rounded-lg border border-border bg-surface">
+        {filtered ? (filteredEmpty ?? empty) : empty}
+      </div>
+    );
   }
 
   const { pageIndex, pageSize: size } = table.state.pagination;
@@ -111,7 +176,14 @@ export function DataTable<TData extends RowData>({
   const cellPadding = density === 'compact' ? 'py-2' : 'py-4';
 
   return (
-    <div className={cn('overflow-hidden rounded-lg border border-border bg-surface', className)}>
+    <div
+      aria-busy={refreshing || undefined}
+      className={cn(
+        'overflow-hidden rounded-lg border border-border bg-surface transition-opacity duration-(--duration-fast)',
+        refreshing && 'opacity-60',
+        className,
+      )}
+    >
       {selectable && selectedCount > 0 ? (
         <div
           className="border-b border-border bg-primary-softer px-4 py-2 text-sm font-medium text-nav-active-text"
@@ -157,7 +229,10 @@ export function DataTable<TData extends RowData>({
                             ? 'descending'
                             : undefined
                       }
-                      className="px-4 py-3 text-start font-semibold text-text-muted"
+                      className={cn(
+                        'px-4 py-3 font-semibold text-text-muted',
+                        numeric.has(header.column.id) ? 'text-end' : 'text-start',
+                      )}
                     >
                       {header.isPlaceholder ? null : canSort ? (
                         <button
@@ -218,7 +293,14 @@ export function DataTable<TData extends RowData>({
                     </td>
                   ) : null}
                   {row.getAllCells().map((cell) => (
-                    <td key={cell.id} className={cn('px-4 text-text', cellPadding)}>
+                    <td
+                      key={cell.id}
+                      className={cn(
+                        'px-4 text-text',
+                        cellPadding,
+                        numeric.has(cell.column.id) && 'text-end tabular-nums',
+                      )}
+                    >
                       <table.FlexRender cell={cell} />
                     </td>
                   ))}
@@ -253,7 +335,10 @@ export function DataTable<TData extends RowData>({
               ))}
             </select>
           </label>
-          <nav aria-label={t('table.pagination')} className="flex items-center gap-1">
+          <nav
+            aria-label={`${label}: ${t('table.pagination')}`}
+            className="flex items-center gap-1"
+          >
             <button
               type="button"
               onClick={() => {

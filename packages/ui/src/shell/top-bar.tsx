@@ -18,7 +18,7 @@ export function FarmSwitcher({ name, onClick }: { name: string; onClick?: () => 
       type="button"
       className={barButton}
       onClick={onClick}
-      aria-label={t('topbar.farmSwitcher')}
+      aria-label={`${name}, ${t('topbar.farmSwitcher')}`}
     >
       <Warehouse className="size-5 text-primary" aria-hidden />
       <span className="max-w-40 truncate">{name}</span>
@@ -99,7 +99,10 @@ export function LanguageSwitcher<T extends string>({
   const current = options.find((o) => o.value === value);
   return (
     <DropdownMenu.Root>
-      <DropdownMenu.Trigger className={barButton} aria-label={t('topbar.language')}>
+      <DropdownMenu.Trigger
+        className={barButton}
+        aria-label={`${current?.label ?? ''}, ${t('topbar.language')}`}
+      >
         <Globe className="size-5 text-text-muted" aria-hidden />
         <span>{current?.label}</span>
       </DropdownMenu.Trigger>
@@ -159,16 +162,15 @@ export function UserMenu({
   role: string;
   children?: ReactNode;
 }) {
-  const { t } = useTranslation();
   return (
     <DropdownMenu.Root>
       <DropdownMenu.Trigger
-        aria-label={t('topbar.userMenu')}
+        aria-label={`${name} ${role}`}
         className="flex items-center gap-3 rounded-sm px-1 py-1 hover:bg-bg-sunken"
       >
         <Avatar name={name} />
         <span className="hidden text-start leading-tight md:block">
-          <span className="block text-sm font-semibold text-text">{name}</span>
+          <span className="block text-sm font-semibold text-text">{name}</span>{' '}
           <span className="block text-sm text-text-muted">{role}</span>
         </span>
         <ChevronDown className="hidden size-4 text-text-muted md:block" aria-hidden />

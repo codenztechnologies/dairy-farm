@@ -1,5 +1,13 @@
 {
   "extends": "@dairy/config/tsconfig/react-lib.json",
   "compilerOptions": { "types": ["node"] },
-  "include": ["src", "vitest.config.ts", "vitest.setup.ts", "eslint.config.js"]
+  "include": [
+    "src",
+    ".storybook/main.ts",
+    ".storybook/preview.tsx",
+    ".storybook/globals.d.ts",
+    "vitest.config.ts",
+    "vitest.setup.ts",
+    "eslint.config.js"
+  ]
 }
