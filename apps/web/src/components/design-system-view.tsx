@@ -30,7 +30,9 @@ import {
 import { Droplets, Plus } from 'lucide-react';
 import { useState, type ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useOpenPalette } from './app-frame';
 import { DesignSystemExtras } from './design-system-extras';
+import { DesignSystemSlice3 } from './design-system-slice3';
 
 const STATUSES: AnimalStatus[] = ['lactating', 'dry', 'pregnant', 'calf', 'sick', 'inactive'];
 
@@ -62,6 +64,7 @@ function Section({ title, children }: { title: string; children: ReactNode }) {
 
 export function DesignSystemView() {
   const { t } = useTranslation();
+  const openPalette = useOpenPalette();
   const [note, setNote] = useState('');
 
   return (
@@ -161,6 +164,7 @@ export function DesignSystemView() {
       </Section>
 
       <DesignSystemExtras />
+      <DesignSystemSlice3 onOpenPalette={openPalette} />
 
       <Section title={t('ds.sectionStates')}>
         <div className="grid gap-4 lg:grid-cols-2">

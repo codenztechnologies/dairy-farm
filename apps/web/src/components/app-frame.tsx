@@ -8,12 +8,16 @@ import {
   LanguageSwitcher,
   MenuItem,
   MenuLabel,
-  NotificationBell,
+  CommandPalette,
+  NotificationCenter,
   SearchTrigger,
   Sidebar,
   ThemeToggle,
   UserMenu,
+  useCommandShortcut,
   type NavItem,
+  type NotificationItem,
+  type PaletteGroup,
 } from '@dairy/ui';
 import {
   BarChart3,
@@ -32,7 +36,15 @@ import {
 } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import { useState, useSyncExternalStore, type ReactNode } from 'react';
+import {
+  createContext,
+  use,
+  useCallback,
+  useMemo,
+  useState,
+  useSyncExternalStore,
+  type ReactNode,
+} from 'react';
 import { useTranslation } from 'react-i18next';
 import {
   LOCALE_COOKIE,
@@ -51,6 +63,13 @@ function subscribeSystemTheme(onChange: () => void): () => void {
 
 function getSystemDark(): boolean {
   return window.matchMedia('(prefers-color-scheme: dark)').matches;
+}
+
+const PaletteContext = createContext<() => void>(() => undefined);
+
+/** Lets any page open the Ctrl K palette (the search box in the top bar uses the same one). */
+export function useOpenPalette(): () => void {
+  return use(PaletteContext);
 }
 
 const SHOW_DESIGN_SYSTEM = process.env.NODE_ENV !== 'production';
@@ -82,6 +101,15 @@ export function AppFrame({
   const pathname = usePathname();
   const router = useRouter();
   const [collapsed, setCollapsed] = useState(false);
+  const [paletteOpen, setPaletteOpen] = useState(false);
+  const [readIds, setReadIds] = useState<readonly string[]>([]);
+  const openPalette = useCallback(() => {
+    setPaletteOpen(true);
+  }, []);
+  const togglePalette = useCallback(() => {
+    setPaletteOpen((open) => !open);
+  }, []);
+  useCommandShortcut(togglePalette);
   const systemDark = useSyncExternalStore(subscribeSystemTheme, getSystemDark, () => false);
   const [choice, setChoice] = useState<ThemeName | undefined>(initialTheme);
   // Without a saved choice the CSS follows the OS setting; mirror it for the toggle icon.
@@ -111,6 +139,49 @@ export function AppFrame({
     ...(SHOW_DESIGN_SYSTEM ? [item('designSystem', Palette, '/design-system')] : []),
     item('settings', Settings, '/settings'),
     item('help', HelpCircle, '/help'),
+  ];
+
+  // Sample notifications until the alert engine exists (Phase 1B).
+  const notifications: NotificationItem[] = useMemo(
+    () =>
+      [
+        {
+          id: 'n1',
+          title: t('sample.notifVaccine'),
+          body: t('sample.notifVaccineBody'),
+          time: t('sample.minutesAgo', { count: 12 }),
+          tone: 'warning' as const,
+        },
+        {
+          id: 'n2',
+          title: t('sample.notifHold'),
+          body: t('sample.notifHoldBody'),
+          time: t('sample.hoursAgo', { count: 3 }),
+          tone: 'info' as const,
+        },
+        {
+          id: 'n3',
+          title: t('sample.notifStock'),
+          body: t('sample.notifStockBody'),
+          time: t('sample.hoursAgo', { count: 5 }),
+          tone: 'danger' as const,
+        },
+      ].map((item) => ({ ...item, unread: !readIds.includes(item.id) })),
+    [t, readIds],
+  );
+
+  const paletteGroups: PaletteGroup[] = [
+    {
+      heading: t('palette.pages'),
+      items: [...items, ...footerItems].map((nav) => ({
+        id: nav.id,
+        label: nav.label,
+        icon: nav.icon,
+        onSelect: () => {
+          router.push(nav.href);
+        },
+      })),
+    },
   ];
 
   function changeLocale(next: Locale) {
@@ -150,10 +221,16 @@ export function AppFrame({
             <SearchTrigger
               placeholder={t('topbar.searchPlaceholder')}
               hint={t('topbar.searchHint')}
+              onClick={openPalette}
             />
           </div>
           <div className="ms-auto flex items-center gap-1 sm:gap-2">
-            <NotificationBell count={3} />
+            <NotificationCenter
+              items={notifications}
+              onMarkAllRead={() => {
+                setReadIds(notifications.map((n) => n.id));
+              }}
+            />
             <div className="hidden items-center gap-2 sm:flex">
               <LanguageSwitcher
                 value={locale}
@@ -187,7 +264,13 @@ export function AppFrame({
         </>
       }
     >
-      {children}
+      <PaletteContext value={openPalette}>{children}</PaletteContext>
+      <CommandPalette
+        open={paletteOpen}
+        onOpenChange={setPaletteOpen}
+        groups={paletteGroups}
+        placeholder={t('topbar.searchPlaceholder')}
+      />
     </AppShell>
   );
 }
