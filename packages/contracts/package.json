@@ -1,0 +1,27 @@
+{
+  "name": "@dairy/contracts",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Zod schemas and validators shared by web, mobile and API (single source of validation)",
+  "exports": {
+    ".": "./src/index.ts",
+    "./validators": "./src/validators/index.ts"
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "libphonenumber-js": "1.13.15",
+    "zod": "4.6.7"
+  },
+  "devDependencies": {
+    "@dairy/config": "workspace:*",
+    "@types/node": "26.6.5",
+    "eslint": "10.13.0",
+    "typescript": "6.0.3",
+    "vitest": "5.0.5"
+  }
+}
