@@ -2,7 +2,7 @@ import { createContext, use, useId, type ComponentProps, type ReactNode } from '
 import { useTranslation } from 'react-i18next';
 import { cn } from '../lib/cn';
 
-interface FieldContextValue {
+export interface FieldContextValue {
   id: string;
   describedBy: string | undefined;
   invalid: boolean;
@@ -11,7 +11,7 @@ interface FieldContextValue {
 
 const FieldContext = createContext<FieldContextValue | null>(null);
 
-function useFieldContext(): FieldContextValue | null {
+export function useFieldContext(): FieldContextValue | null {
   return use(FieldContext);
 }
 
